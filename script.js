@@ -13,12 +13,12 @@ fetch('attached_assets/products.json')
     .catch(error => console.error('Error loading products:', error));
 
 // Display products
-function displayProducts(productsToShow, limit = null) {
-    const productGrid = document.getElementById('productGrid');
-    if (!productGrid) return;
+function displayProducts(productsToShow) {
+    const productSlider = document.getElementById('productSlider');
+    if (!productSlider) return;
     
-    productGrid.innerHTML = '';
-    const products = limit ? productsToShow.slice(0, limit) : productsToShow;
+    productSlider.innerHTML = '';
+    const featuredProducts = productsToShow.slice(0, 5);
 
     products.forEach(product => {
         const productCard = document.createElement('div');
@@ -121,6 +121,21 @@ function removeFromCart(productId) {
     cart = cart.filter(item => item.ID !== productId);
     updateCartCount();
     updateCartDisplay();
+}
+
+// Slider controls
+const prevButton = document.querySelector('.slider-button.prev');
+const nextButton = document.querySelector('.slider-button.next');
+const slider = document.getElementById('productSlider');
+
+if (prevButton && nextButton) {
+    nextButton.addEventListener('click', () => {
+        slider.scrollBy({ left: slider.offsetWidth, behavior: 'smooth' });
+    });
+
+    prevButton.addEventListener('click', () => {
+        slider.scrollBy({ left: -slider.offsetWidth, behavior: 'smooth' });
+    });
 }
 
 // Cart modal
