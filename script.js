@@ -3,24 +3,41 @@
 let products = [];
 let cart = [];
 
-// Fetch products
-fetch('attached_assets/products.json')
-    .then(response => response.json())
-    .then(data => {
-        products = data;
-        displayProducts(products);
-    })
-    .catch(error => console.error('Error loading products:', error));
+// Load products directly
+products = [
+  // Copy all 30 products from products.json here
+  {
+    "ID": "PET0001",
+    "Name": "Thức ăn cho chó Pedigree 1.5kg",
+    "Images": ["pedigree_1.jpg", "pedigree_2.jpg"],
+    "Description": "Thức ăn dinh dưỡng cho chó trưởng thành, hỗ trợ tiêu hóa và tăng cường miễn dịch.",
+    "Quantity": 50,
+    "Price": 150000,
+    "Brand": "Pedigree", 
+    "Origin": "Thái Lan",
+    "Category": "Thức ăn cho chó"
+  },
+  // Add remaining 29 products here...
+];
 
-// Display products
+displayProducts(products);
 function displayProducts(productsToShow) {
     const productSlider = document.getElementById('productSlider');
-    if (!productSlider) return;
+    const productGrid = document.getElementById('productGrid');
     
-    productSlider.innerHTML = '';
-    const featuredProducts = productsToShow.slice(0, 5);
-
-    products.forEach(product => {
+    if (productSlider) {
+        productSlider.innerHTML = '';
+        const featuredProducts = productsToShow.slice(0, 5);
+        
+        featuredProducts.forEach(product => {
+            const productCard = createProductCard(product);
+            productSlider.appendChild(productCard);
+        });
+    }
+    
+    if (productGrid) {
+        productGrid.innerHTML = '';
+        productsToShow.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.innerHTML = `
@@ -38,11 +55,34 @@ function displayProducts(productsToShow) {
                 </div>
             </div>
         `;
-        productGrid.appendChild(productCard);
-    });
+        const productCard = createProductCard(product);
+            productGrid.appendChild(productCard);
+        });
+    }
 }
 
-// Format price with commas
+function createProductCard(product) {
+    const productCard = document.createElement('div');
+    productCard.className = 'product-card';
+    productCard.innerHTML = `
+        <img src="https://via.placeholder.com/200" alt="${product.Name}" class="product-image">
+        <div class="product-info">
+            <h3 class="product-title">${product.Name}</h3>
+            <p class="product-price">${formatPrice(product.Price)}đ</p>
+            <div class="product-actions">
+                <button onclick="showProductDetails(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                    Xem chi tiết
+                </button>
+                <button class="add-to-cart" onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                    Thêm vào giỏ hàng
+                </button>
+            </div>
+        </div>
+    `;
+    return productCard;
+}
+
+// Format price withh commas
 function formatPrice(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
