@@ -13,11 +13,14 @@ fetch('attached_assets/products.json')
     .catch(error => console.error('Error loading products:', error));
 
 // Display products
-function displayProducts(productsToShow) {
+function displayProducts(productsToShow, limit = null) {
     const productGrid = document.getElementById('productGrid');
+    if (!productGrid) return;
+    
     productGrid.innerHTML = '';
+    const products = limit ? productsToShow.slice(0, limit) : productsToShow;
 
-    productsToShow.forEach(product => {
+    products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.innerHTML = `
@@ -25,9 +28,14 @@ function displayProducts(productsToShow) {
             <div class="product-info">
                 <h3 class="product-title">${product.Name}</h3>
                 <p class="product-price">${formatPrice(product.Price)}đ</p>
-                <button class="add-to-cart" onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})">
-                    Thêm vào giỏ hàng
-                </button>
+                <div class="product-actions">
+                    <button onclick="showProductDetails(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                        Xem chi tiết
+                    </button>
+                    <button class="add-to-cart" onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                        Thêm vào giỏ hàng
+                    </button>
+                </div>
             </div>
         `;
         productGrid.appendChild(productCard);
@@ -139,4 +147,45 @@ document.querySelector('.checkout-btn').addEventListener('click', () => {
     updateCartCount();
     updateCartDisplay();
     cartModal.classList.remove('active');
+
+function showProductDetails(product) {
+    const modal = document.createElement('div');
+    modal.className = 'product-modal';
+    modal.innerHTML = `
+        <div class="product-modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="product-detail">
+                <img src="https://via.placeholder.com/400" alt="${product.Name}">
+                <div class="product-detail-info">
+                    <h2>${product.Name}</h2>
+                    <p class="price">${formatPrice(product.Price)}đ</p>
+                    <p class="description">${product.Description}</p>
+                    <p><strong>Thương hiệu:</strong> ${product.Brand}</p>
+                    <p><strong>Xuất xứ:</strong> ${product.Origin}</p>
+                    <button class="add-to-cart" onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                        Thêm vào giỏ hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    modal.querySelector('.close-modal').onclick = () => {
+        document.body.removeChild(modal);
+    };
+}
+
+// Show notification
+function showNotification(message, isSuccess = true) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        document.body.removeChild(notification);
+    }, 3000);
+}
+
 });
