@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
 }
@@ -33,10 +33,21 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+.logo{
+    display: flex;
+    align-items: center;
+}
 
 .logo h1 {
     color: var(--primary-color);
     font-size: 1.8rem;
+    margin: 0;
+}
+
+.logo-image {
+    width: 70px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Adjust the spacing as needed */
 }
 
 nav ul {
@@ -56,10 +67,10 @@ nav a:hover {
     color: var(--primary-color);
 }
 
-.dropdown {
+/* .dropdown {
     position: relative;
-}
-
+} */
+/* 
 .dropdown-content {
     display: none;
     position: absolute;
@@ -77,7 +88,7 @@ nav a:hover {
 
 .dropdown-content li {
     padding: 0.5rem 1rem;
-}
+} */
 
 .header-actions {
     display: flex;
