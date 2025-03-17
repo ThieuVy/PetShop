@@ -1,31 +1,32 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+name: Node ci` command relies on these lock files to install the exact dependencies for the project.
 
-name: Node.js CI
+Here are.js CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+  pull the steps to resolve this issue:
+
+1. **Ensure Lock File Exists**: Make sure that your repository has_request:
+    branches:
+      - main
 
 jobs:
-  build:
-
+  build one of the lock files (`package-lock.json`, `npm-sh:
     runs-on: ubuntu-latest
 
     strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+      matrixrinkwrap.json`, or `yarn.lock`). If you don't have:
+        node-version: [18.x]
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - a lock file, you can generate one by running `npm uses: actions/checkout@v2
+      - name: Use Node.js install` or `yarn install` locally, which will create ${{ matrix.node-version }}
+        uses: actions/setup a `package-lock.json-node@v2
+        with:
+          node-version: ${{` or `yarn.lock` file respectively.
+
+2. ** matrix.node-version }}
+      - run: npm install
+     Add Lock File to Repository**: Once the lock file is generated, add it to your repository and commit - run: npm test
