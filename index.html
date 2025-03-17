@@ -1,16 +1,113 @@
+
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Shop</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
+    <header>
+        <div class="logo">
+            <h1>Pet Shop</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Trang chủ</a></li>
+                <li class="dropdown">
+                    <a href="#">Danh mục <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Thức ăn cho chó</a></li>
+                        <li><a href="#">Thức ăn cho mèo</a></li>
+                        <li><a href="#">Phụ kiện cho chó</a></li>
+                        <li><a href="#">Phụ kiện cho mèo</a></li>
+                        <li><a href="#">Vệ sinh cho mèo</a></li>
+                        <li><a href="#">Phụ kiện vận chuyển</a></li>
+                        <li><a href="#">Chăm sóc thú cưng</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Về chúng tôi</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
 
+    <main>
+        <section class="hero">
+            <h2>Chào mừng đến với Pet Shop</h2>
+            <p>Nơi cung cấp các sản phẩm chất lượng cho thú cưng của bạn</p>
+        </section>
+
+        <section class="products">
+            <h2>Sản phẩm nổi bật</h2>
+            <div class="product-filters">
+                <button class="active">Tất cả</button>
+                <button>Thức ăn</button>
+                <button>Phụ kiện</button>
+                <button>Vệ sinh</button>
+            </div>
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Pet Shop</h3>
+                <p>Địa chỉ: 123 Đường ABC, Quận XYZ</p>
+                <p>Điện thoại: 0123-456-789</p>
+                <p>Email: contact@petshop.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Theo dõi chúng tôi</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Pet Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2>Giỏ hàng <span class="close-cart">&times;</span></h2>
+            <div class="cart-items">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="cart-total">
+                <p>Tổng cộng: <span>0đ</span></p>
+                <button class="checkout-btn">Thanh toán</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
