@@ -1,27 +1,19 @@
-const productList = require('./products');
+const { products } = require('../../products');
 let cart = [];
 
-displayProducts(productList);
+document.addEventListener('DOMContentLoaded', () => {
+    displayProducts(products.slice(0, 5));
+});
 
 function displayProducts(productsToShow) {
     const productSlider = document.getElementById('productSlider');
-    const productGrid = document.getElementById('productGrid');
     
     if (productSlider) {
         productSlider.innerHTML = '';
-        const featuredProducts = productsToShow.slice(0, 5);
         
-        featuredProducts.forEach(product => {
-            const productCard = createProductCard(product);
-            productSlider.appendChild(productCard);
-        });
-    }
-    
-    if (productGrid) {
-        productGrid.innerHTML = '';
         productsToShow.forEach(product => {
             const productCard = createProductCard(product);
-            productGrid.appendChild(productCard);
+            productSlider.appendChild(productCard);
         });
     }
 }
@@ -30,10 +22,11 @@ function createProductCard(product) {
     const productCard = document.createElement('div');
     productCard.className = 'product-card';
     productCard.innerHTML = `
-        <img src="https://via.placeholder.com/200" alt="${product.Name}" class="product-image">
+        <img src="${product.Images[0]}" alt="${product.Name}" class="product-image">
         <div class="product-info">
             <h3 class="product-title">${product.Name}</h3>
             <p class="product-price">${formatPrice(product.Price)}đ</p>
+            <p class="product-description">${product.Description.substring(0, 100)}...</p>
             <div class="product-actions">
                 <button onclick="showProductDetails(${JSON.stringify(product).replace(/"/g, '&quot;')})">
                     Xem chi tiết
@@ -51,37 +44,6 @@ function createProductCard(product) {
 function formatPrice(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-// Filter products
-const filterButtons = document.querySelectorAll('.product-filters button');
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        const category = button.textContent;
-        if (category === 'Tất cả') {
-            displayProducts(productList);
-        } else {
-            const filtered = productList.filter(product => 
-                product.Category.includes(category === 'Thức ăn' ? 'Thức ăn' : 
-                    category === 'Phụ kiện' ? 'Phụ kiện' : 'Vệ sinh')
-            );
-            displayProducts(filtered);
-        }
-    });
-});
-
-// Search functionality
-const searchInput = document.querySelector('.search-box input');
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filtered = productList.filter(product => 
-        product.Name.toLowerCase().includes(searchTerm) ||
-        product.Description.toLowerCase().includes(searchTerm)
-    );
-    displayProducts(filtered);
-});
 
 // Cart functionality
 function addToCart(product) {
@@ -109,7 +71,7 @@ function updateCartDisplay() {
     
     cartItems.innerHTML = cart.map(item => `
         <div class="cart-item">
-            <img src="https://via.placeholder.com/50" alt="${item.Name}">
+            <img src="${item.Images[0]}" alt="${item.Name}">
             <div class="cart-item-details">
                 <h4>${item.Name}</h4>
                 <p>${formatPrice(item.Price)}đ x ${item.quantity}</p>
@@ -128,47 +90,6 @@ function removeFromCart(productId) {
     updateCartDisplay();
 }
 
-// Slider controls
-const prevButton = document.querySelector('.slider-button.prev');
-const nextButton = document.querySelector('.slider-button.next');
-const slider = document.getElementById('productSlider');
-
-if (prevButton && nextButton) {
-    nextButton.addEventListener('click', () => {
-        slider.scrollBy({ left: slider.offsetWidth, behavior: 'smooth' });
-    });
-
-    prevButton.addEventListener('click', () => {
-        slider.scrollBy({ left: -slider.offsetWidth, behavior: 'smooth' });
-    });
-}
-
-// Cart modal
-const cartIcon = document.querySelector('.cart');
-const cartModal = document.getElementById('cartModal');
-const closeCart = document.querySelector('.close-cart');
-
-cartIcon.addEventListener('click', () => {
-    cartModal.classList.add('active');
-});
-
-closeCart.addEventListener('click', () => {
-    cartModal.classList.remove('active');
-});
-
-// Checkout
-document.querySelector('.checkout-btn').addEventListener('click', () => {
-    if (cart.length === 0) {
-        alert('Giỏ hàng trống!');
-        return;
-    }
-    alert('Cảm ơn bạn đã mua hàng!');
-    cart = [];
-    updateCartCount();
-    updateCartDisplay();
-    cartModal.classList.remove('active');
-});
-
 function showProductDetails(product) {
     const modal = document.createElement('div');
     modal.className = 'product-modal';
@@ -176,7 +97,7 @@ function showProductDetails(product) {
         <div class="product-modal-content">
             <span class="close-modal">&times;</span>
             <div class="product-detail">
-                <img src="https://via.placeholder.com/400" alt="${product.Name}">
+                <img src="${product.Images[0]}" alt="${product.Name}">
                 <div class="product-detail-info">
                     <h2>${product.Name}</h2>
                     <p class="price">${formatPrice(product.Price)}đ</p>
@@ -195,16 +116,4 @@ function showProductDetails(product) {
     modal.querySelector('.close-modal').onclick = () => {
         document.body.removeChild(modal);
     };
-}
-
-// Show notification
-function showNotification(message, isSuccess = true) {
-    const notification = document.createElement('div');
-    notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
-    notification.textContent = message;
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        document.body.removeChild(notification);
-    }, 3000);
 }
