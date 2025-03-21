@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm - Pet Shop</title>
+    <link href="../Styles/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../Images/Logo.jpg" alt="logo" class="logo-image">
+            <h1>Pet Shop</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/home">Trang chủ</a></li>
+                <li><a href="/products">Sản phẩm</a></li>
+                <li><a href="/about">Về chúng tôi</a></li>
+                <li><a href="/contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="auth-links">
+                <a href="/login">Đăng nhập</a>
+                <a href="/register">Đăng ký</a>
+            </div>
+            <div class="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="product-details-container">
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img src="" alt="" id="mainProductImage">
+                    <div class="gallery-nav">
+                        <button onclick="changeImage(-1)" class="nav-btn prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                        <button onclick="changeImage(1)" class="nav-btn next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    </div>
+                </div>
+                <div class="thumbnail-gallery">
+                    <!-- Thumbnails will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <h1 id="productName"></h1>
+                <div class="product-price" id="productPrice"></div>
+                <div class="product-actions">
+                    <div class="quantity-selector">
+                        <button onclick="updateQuantity(-1)">-</button>
+                        <span id="quantity">1</span>
+                        <button onclick="updateQuantity(1)">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCartFromDetails()">
+                        <i class="fas fa-shopping-cart"></i>
+                    Thêm vào giỏ hàng
+                </button>
+                </div>
+                
+                <div class="product-description">
+                    <h2>Mô tả sản phẩm</h2>
+                    <p id="productDescription"></p>
+                    </div>
+                
+                <div class="product-details">
+                    <h2>Thông tin chi tiết</h2>
+                    <table>
+                        <tr>
+                            <td>Thương hiệu:</td>
+                            <td id="productBrand"></td>
+                        </tr>
+                        <tr>
+                            <td>Xuất xứ:</td>
+                            <td id="productOrigin"></td>
+                        </tr>
+                        <tr>
+                            <td>Danh mục:</td>
+                            <td id="productCategory"></td>
+                        </tr>
+                        <tr>
+                            <td>Mã sản phẩm:</td>
+                            <td id="productId"></td>
+                        </tr>
+                        <tr>
+                            <td>Số lượng còn lại:</td>
+                            <td id="productStock"></td>
+                        </tr>
+                    </table>
+                    </div>
+            </div>
+        </div>
+
+        <div class="related-products">
+            <h2>Sản phẩm liên quan</h2>
+            <div class="related-products-grid">
+                <!-- Related products will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Pet Shop</h3>
+                <p>Địa chỉ: 123 Đường ABC, Quận XYZ</p>
+                <p>Điện thoại: 0123-456-789</p>
+                <p>Email: contact@petshop.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="/home">Trang chủ</a></li>
+                    <li><a href="/products">Sản phẩm</a></li>
+                    <li><a href="/about">Về chúng tôi</a></li>
+                    <li><a href="/contact">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Theo dõi chúng tôi</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Pet Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Load products data first -->
+    <script src="../../products.js"></script>
+    <!-- Then load the main script -->
+    <script src="../script.js"></script>
+</body>
+</html> 

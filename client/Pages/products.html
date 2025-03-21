@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - Pet Shop</title>
+    <title>Sản phẩm - Pet Shop</title>
     <link href="../Styles/style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -17,10 +17,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="products.html" class="active">Sản phẩm</a></li>
-                <li><a href="about.html">Về chúng tôi</a></li>
-                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="/home">Trang chủ</a></li>
+                <li><a href="/products" class="active">Sản phẩm</a></li>
+                <li><a href="/about">Về chúng tôi</a></li>
+                <li><a href="/contact">Liên hệ</a></li>
             </ul>
         </nav>
         <div class="header-actions">
@@ -29,8 +29,8 @@
                 <button><i class="fas fa-search"></i></button>
             </div>
             <div class="auth-links">
-                <a href="login.html">Đăng nhập</a>
-                <a href="register.html">Đăng ký</a>
+                <a href="/login">Đăng nhập</a>
+                <a href="/register">Đăng ký</a>
             </div>
             <div class="cart">
                 <i class="fas fa-shopping-cart"></i>
@@ -40,19 +40,35 @@
     </header>
 
     <main>
-        <section class="products">
-            <h2>Sản phẩm của chúng tôi</h2>
+        <section class="products-section">
+            <h2>Tất cả sản phẩm</h2>
             <div class="product-filters">
                 <button class="active">Tất cả</button>
-                <button>Thức ăn</button>
+                <button>Thức ăn cho chó</button>
+                <button>Thức ăn cho mèo</button>
                 <button>Phụ kiện</button>
-                <button>Vật dụng</button>
+                <button>Vệ sinh</button>
             </div>
             <div class="product-grid" id="productGrid">
                 <!-- Products will be loaded here by JavaScript -->
             </div>
         </section>
     </main>
+
+    <div class="cart-modal">
+        <div class="cart-content">
+            <button class="close-cart" onclick="hideCart()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Giỏ hàng</h2>
+            <div class="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-total">
+                <!-- Total and checkout button will be added here dynamically -->
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -65,10 +81,10 @@
             <div class="footer-section">
                 <h3>Liên kết nhanh</h3>
                 <ul>
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li><a href="products.html">Sản phẩm</a></li>
-                    <li><a href="about.html">Về chúng tôi</a></li>
-                    <li><a href="contact.html">Liên hệ</a></li>
+                    <li><a href="/home">Trang chủ</a></li>
+                    <li><a href="/products">Sản phẩm</a></li>
+                    <li><a href="/about">Về chúng tôi</a></li>
+                    <li><a href="/contact">Liên hệ</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -84,6 +100,10 @@
             <p>&copy; 2024 Pet Shop. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Load products data first -->
+    <script src="../../products.js"></script>
+    <!-- Then load the main script -->
     <script src="../script.js"></script>
 </body>
 
